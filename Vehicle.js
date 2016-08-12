@@ -19,14 +19,17 @@ var Vehicle = function(x, y) {
         var desired = p5.Vector.sub(target,this.position); //vector pointing FROM loc TO target
         var distance = desired.mag();
         //damping within 100 pixels
+
+
         if (distance < 100) {
+        	//set magnitude according to how close we are
             var scaledSpeed = map(distance, 0, 100, 0, this.maxSpeed);
             desired.setMag(scaledSpeed);
         } else { desired.setMag(this.maxSpeed) }
 
         //Steer - desired minus velocity
 
-        var steer = p5.Vector.sub(desired, this.velocity);
+        var steer = p5.Vector.sub(desired, this.velocity);//steer = desired-velocity
         steer.limit(this.maxForce);
         this.applyForce(steer);
 
